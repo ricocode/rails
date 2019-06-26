@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  template: template0
+  # Cloud9の場合、文字コードをUnicodeに指定したい時、
+  # 仕様上テンプレートをtemplate0に指定する必要があります。
+
+development:
+  <<: *default
+  database: sample_development
+
+test:
+  <<: *default
+  database: sample_test
+
+production:
+  <<: *default
+  database: sample_production
+  username: sample
+  password: <%= ENV['SAMPLE_DATABASE_PASSWORD'] %>
